@@ -1,0 +1,65 @@
+package za.ac.iie.myproject1
+
+import android.annotation.SuppressLint
+import android.os.Bundle
+import android.widget.Button
+import android.widget.EditText
+import android.widget.TextView
+import androidx.appcompat.app.AppCompatActivity
+import kotlin.random.Random
+
+class MainActivity : AppCompatActivity() {
+
+
+    private val historicalFigures = mapOf(
+      67 to "Leonardo da Vinci",
+      84 to "Isaac Newton",
+      35 to "Wolfgang Amadeus Mozart",
+      25 to "Tupac Shakur",
+      35 to "AKA",
+      95 to "Nelson Mandela",
+      41 to "Lil Wayne",
+      50 to "Michael Jackson",
+      37 to "Drake",
+      39 to "Cleopatra",
+
+
+
+    )
+
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_main)
+
+        val calculatebutton = findViewById<Button>(R.id.calculateButton)
+        val Clearbutton = findViewById<Button>(R.id.Clearbutton)
+        val ageResult = findViewById<TextView>(R.id.ageResult)
+        val ageInput = findViewById<EditText>(R.id.ageInput)
+
+        Clearbutton.setOnClickListener {
+            ageInput.text.clear()
+        }
+
+        calculatebutton.setOnClickListener {
+            val age = ageInput.text.toString().toIntOrNull()
+            age?.let {
+                val figure = historicalFigures[age]
+                if (figure != null){
+                    ageResult.text = "You are the same age when $figure died"
+            } else {
+            ageResult.text = "There is no historic figure who is $age years old in our history records."
+        }
+
+
+             } ?: run {
+            ageResult.text = "Please enter valid age."
+
+        }
+
+    }
+
+}
+
+}
+
